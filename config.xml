@@ -8,6 +8,7 @@
         <!--         
         co.gov.atlantico.aaemprod playstore
         co.gov.atlantico.aaem appstore -->
+        <platform name="android" />
 
 
         <name>AAEM</name>
