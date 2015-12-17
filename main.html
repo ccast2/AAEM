@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" /> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="Your App">
+	<title>Atención Medica Especializada</title>
+
+
+	<!-- 
+	<script src="http://192.168.0.7:8080/target/target-script-min.js#aaem"></script>
+	 -->
+	<!-- jquery -->
+
+	<link rel="stylesheet" href="jquery/css/jquery.mobile-1.4.2.min.css" />
+	<script src="jquery/js/jquery-2.1.0.min.js"></script>
+	<script src="jquery/js/jquery.mobile-1.4.2.min.js"></script>
+	
+	<script src="phonegap.js"></script>
+	
+	<!-- Modules -->
+
+	<script src="js/configurationModule.js"></script>
+	<script src="js/sessionModule.js"></script>
+	<script src="js/ajaxModule.js"></script>
+	<script src="js/notificationsModule.js"></script>
+	<script src="js/printModule.js"></script>
+	<script src="js/pacientModule.js"></script>
+	<script src="js/recordsModule.js"></script>
+	<script src="js/chatModule.js"></script>
+
+	<script type="text/javascript" src="js/PushPlugin.js"></script>
+	<script src="js/pushModule.js"></script>
+
+
+	<script src="js/mainModule.js"></script>
+
+
+
+	<!-- datepicker -->
+
+	<link rel="stylesheet" href="jquery/css/jquery.mobile.datepicker.css" />
+	<script src="jquery/js/jquery.ui.datepicker.js"></script>
+	<script src="jquery/js/jquery.mobile.datepicker.js"></script>
+
+	<!-- theme -->
+
+	<link rel="stylesheet" href="theme/aea.css" />
+	<link rel="stylesheet" href="theme/jquery.mobile.icons.min.css" />
+
+	<!-- scripts 
+
+
+	<script src="js/resources.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/loadPages.js"></script>
+	<script src="js/chat.js"></script>
+	<script src="js/sha256.js"></script>
+	<script src="js/pushwoosh.js"></script>
+	-->	
+
+
+	<!-- styles -->	
+
+	<link rel="stylesheet" href="styles/style.css" />
+	<link rel="stylesheet" href="styles/device.css" />
+
+	<!-- form validator -->
+
+	<script src="validator/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
+	<script src="validator/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>	
+	<link rel="stylesheet" href="validator/validationEngine.jquery.css" type="text/css"/>
+	<link rel="stylesheet" href="validator/template.css" type="text/css"/>
+
+
+
+</head>
+
+
+<body>
+	<div class="ui-loader-background"> </div>
+	<div data-role="page" id="login">
+		<div data-role="popup" id="popUpRemember" data-theme="a" class="ui-corner-all">
+		    <form  id="rememberForm">
+		        <div style="padding:10px 20px;">
+					<p>Ingrese su usuario y le sera enviada a vuelta de correo una contraseña temporal</p>
+		            <label for="un" class="ui-hidden-accessible">Usuario:</label>
+		            <input type="text" name="rememberUser" id="rememberUser" value="" placeholder="Usuario" class="validate[required,minSizeUsername[6]]">
+		            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-check">Enviar</button>
+		        </div>
+		    </form>
+		</div>
+		<div data-role="popup" id="popUpReset" data-theme="a" class="ui-corner-all">
+		    <form  id="resetForm">
+		        <div style="padding:10px 20px;">
+					<p>Debe cambiar la	 contraseña</p>
+		            <label for="un" class="ui-hidden-accessible">Contraseña:</label>
+		            <input type="password" name="passRemember" id="passRemember" value="" placeholder="Contraseña" class="validate[required,minSize[6]]">
+		            <label for="un" class="ui-hidden-accessible">Repetir Contraseña:</label>
+		            <input type="password" name="repeat-passRemember" id="repeat-passRemember" value="" placeholder="Repetir Contraseña" class="validate[required,equals[passRemember]]">
+		            <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-check">Enviar</button>
+		        </div>
+		    </form>
+		</div>
+		<div data-role="content" data-theme="a" >
+			<img src="img/logo.png" alt="">
+			<form  id="loginForm">
+				<input type="text" name="username" id="username" placeholder="Nombre de usuario" class="validate[required,minSizeUsername[6],ajax[ajaxUserCall]]">
+				<input type="password" name="pass" id="pass" placeholder="Contraseña" class="validate[required,minSize[6]]">
+				<button class="buttonLogin ui-btn ui-mini " id="loginButton">INICIAR SESIÓN</button>
+				<a href="#popUpRemember" data-rel="popup" data-position-to="window"  data-transition="pop">Recordar Contraseña</a>
+
+			</form>
+			<div class="rights">
+				<img src="img/gobernacion.png" width="100%" alt="">
+			</div>
+		</div>
+	</div>
+	<div data-role="page" id="search" data-dom-cache="false">
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="options">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+		<div data-role="header"  data-position="fixed">
+			<a href="#options" data-icon="info" data-rel="button" class="ui-btn-right">Mas</a>
+			<a href="#search" data-icon="back" class="ui-btn-left">Atras</a>			
+			<h1>Ingreso paciente</h1>
+		</div>
+		<div data-role="content">
+		<!-- <img src="1.gif" alt="" style="float:right;width:15px"> -->
+			<form id="searchForm" class="ui-field-contain">
+				<input type="search" name="search_pacient" class="validate[required,minSizeDocu[6],custom[onlyNumberSp]]" placeholder="Número identificación">
+				<button class="formLeft ui-btn ui-mini " id="searchButton">Buscar</button>
+			</form>
+			<div id="pacients"></div>
+		</div>
+	</div>
+
+
+	<div data-role="page" id="registerPacient">
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="options2">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+
+		<div data-role="header"  data-position="fixed">
+			<a href="#options2" data-icon="info" class="ui-btn-right">Mas</a>
+			<a href="#search" data-icon="back" class="ui-btn-left">Atras</a>
+			<h1>Registro paciente</h1>
+		</div>
+
+	    <div role="main" class="ui-content jqm-content jqm-fullwidth">
+			<form id="registerForm">
+				<div class="ui-field-contain">
+					<label for="registername">Nombres:</label>
+					<input type="text" name="registername" id="registername" placeholder="Nombres" class="validate[required]">
+				</div>
+				<div class="ui-field-contain">
+					<label for="registerlastname">Apellidos:</label>
+					<input type="text" name="registerlastname" id="registerlastname" placeholder="Apellidos" class="validate[required]" >
+				</div>
+				<div class="ui-field-contain" style="height: 68px";>
+					<div class="halfSizeTi">
+						<label for="registertypeid">Documento:</label>
+						<select name="registertypeid" id="typeid" data-mini="true" >
+							<option value="C.C.">C.C.</option>
+							<option value="T.I.">T.I.</option>
+							<option value="C.E.">C.E.</option>
+						</select>
+					</div>
+					<div class="halfSizeInput">
+						<label for="registerid">Numero:</label>
+						<input type="number" name="registerid" id="registerid" placeholder="Documento de Identidad" class="validate[required,custom[onlyNumberSp]]">
+					</div>
+				</div>
+				<div class="ui-field-contain">
+					<label for="registerbirthdate">Fecha de Nacimiento:</label>
+					<input type="text" data-role="date" name="registerbirthdate" id="registerbirthdate" placeholder="aaaa-mm-dd" class="validate[required,custom[date]] datepicker">
+				</div>
+				<div class="ui-field-contain">
+					<label for="registersex">Sexo:</label>
+					<select name="registersex" id="registersex" data-mini="true">
+						<option value="muj">Mujer</option>
+						<option value="hom">Hombre</option>						
+					</select>
+				</div>
+				<div class="ui-field-contain">
+					<label for="registeraddress">Dirección:</label>
+					<input type="text" name="registeraddress" id="registeraddress" placeholder="Dirección" class="validate[required]">
+				</div>
+				<div class="ui-field-contain">
+					<label for="registerphone">Teléfono:</label>
+					<input type="text" name="registerphone" id="registerphone" placeholder="Teléfono" class="validate[required]">
+				</div>
+				<div class="ui-field-contain">
+					<label for="registereps">E.P.S.:</label>
+					<input type="text" name="registereps" id="registereps" placeholder="E.P.S." class="validate[required]">
+				</div>
+
+				<button class="formLeft ui-btn ui-mini " type="submit" id="submitButton">Registrar</button>
+			</form>
+		</div>
+	</div>
+
+	<div data-role="page" id="historyList">
+
+		<div data-role="popup" id="popupPreviewList" class="popupPreview" data-overlay-theme="b" data-theme="b" data-corners="false">
+		    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<!-- <img class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France"> -->
+		</div>
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="historyInfo">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+
+		<div data-role="header"  data-position="fixed">
+			<a href="#historyInfo" data-icon="info" class="ui-btn-right">Mas</a>
+			<a href="#" onclick="window.history.back()" data-icon="back" class="ui-btn-left">Atras</a>			
+
+			<h1>Historia</h1>
+		</div>
+		<div data-role="content">
+
+			<ul data-role="listview" class="ui-body"> 
+
+				<li data-role="list-divider">Motivo de la consulta:</li>
+				<li data-id="subject" ></li>
+				<li data-role="list-divider">Enfermedad Actual:</li>
+				<li data-id="actualdisease" ></li>
+				<li data-role="list-divider">Antecedentes Personales:</li>
+				<li data-id="personalrecord" ></li>
+				<li data-role="list-divider">Antecedentes ginecoobstetricos:</li>
+				<li data-role="list-divider">FUM:</li>
+				<li data-id="fum" ></li>
+				<li data-role="list-divider">G:</li>
+				<li data-id="g" ></li>
+				<li data-role="list-divider">P:</li>
+				<li data-id="p" ></li>
+				<li data-role="list-divider">A:</li>
+				<li data-id="a" ></li>
+				<li data-role="list-divider">C:</li>
+				<li data-id="c" ></li>
+				<li data-role="list-divider">V:</li>
+				<li data-id="v" ></li>
+				<li data-role="list-divider">Edad gestacional:</li>
+				<li data-id="gestage" ></li>
+				<li data-role="list-divider">Examen físico:</li>
+				<li data-role="list-divider">TA:</li>
+				<li data-id="ta" ></li>
+				<li data-role="list-divider">Talla:</li>
+				<li data-id="size" ></li>
+				<li data-role="list-divider">FC:</li>
+				<li data-id="fc" ></li>
+				<li data-role="list-divider">FR:</li>
+				<li data-id="fr" ></li>
+				<li data-role="list-divider">Peso:</li>
+				<li data-id="weight" ></li>
+				<li data-role="list-divider">Imc:</li>
+				<li data-id="imc" ></li>
+				<li data-role="list-divider">Conciencia:</li>
+				<li data-id="awareness" ></li>
+				<li data-role="list-divider">Cabeza, cara, cuello:</li>
+				<li data-id="head" ></li>
+				<li data-role="list-divider">Cardio pulmonar:</li>
+				<li data-id="cardio" ></li>
+				<li data-role="list-divider">Abdomen:</li>
+				<li data-id="abdomen" ></li>
+				<li data-role="list-divider">Altura uterina:</li>
+				<li data-id="height" ></li>
+				<li data-role="list-divider">Frecuencia cardiaca fetal:</li>
+				<li data-id="frecuency" ></li>
+				<li data-role="list-divider">Actividad uterina:</li>
+				<li data-id="activity" ></li>
+				<li data-role="list-divider">Tono:</li>
+				<li data-id="tone" ></li>
+				<li data-role="list-divider">Presentación:</li>
+				<li data-id="presentation" ></li>
+				<li data-role="list-divider">Genitourinario:</li>
+				<li data-id="genit" ></li>
+				<li data-role="list-divider">Dilatación:</li>
+				<li data-id="dilatation" ></li>
+				<li data-role="list-divider">Borramiento:</li>
+				<li data-id="effacement" ></li>
+				<li data-role="list-divider">Estación:</li>
+				<li data-id="estation" ></li>
+				<li data-role="list-divider">Estado de membranas:</li>
+				<li data-id="membranes" ></li>
+				<li data-role="list-divider">Liquido meconiado :</li>
+				<li data-id="liquid" ></li>
+				<li data-role="list-divider">Sangrado:</li>
+				<li data-id="blood" ></li>
+				<li data-role="list-divider">Extremidades:</li>
+				<li data-id="arms" ></li>
+				<li data-role="list-divider">Sistema nervioso central:</li>
+				<li data-id="nervous" ></li>
+				<li data-role="list-divider">Diagnostico:</li>
+				<li data-id="diagnostic" ></li>
+				<li data-role="list-divider">Plan:</li>
+				<li data-id="plan" ></li>
+				<li data-role="list-divider">Paraclínicos:</li>
+				<li data-id="paraclinics" ></li>
+				<li data-role="list-divider">Imágenes diagnosticas:</li>
+				<li data-id="images-dg"></li>
+				<li data-role="list-divider">Motivo de la interconsulta:</li>
+				<li data-id="intersubject" ></li>
+				<li data-role="list-divider">Respuesta:</li>
+				<li style="background: blanchedalmond;">
+				<div id="responseContainer">
+					<table id="responseMessages">
+						<tbody></tbody>
+					</table>		
+
+						
+				</div>
+				</li>
+				<li data-role="list-divider">Evolución:</li>
+				<li data-id="evolution" ></li>
+
+			</ul>
+		</div>
+	</div>
+
+
+	<div data-role="page" id="history">
+
+		<div data-role="popup" id="popupPreview" class="popupPreview" data-overlay-theme="b" data-theme="b" data-corners="false">
+		    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<!-- <img class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France"> -->
+		</div>
+
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="options3">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+
+		<div data-role="header" data-position="fixed">
+			<a href="#options3" data-icon="info" class="ui-btn-right">Mas</a>
+			<a href="#search" data-icon="back" class="ui-btn-left">Atras</a>			
+
+			<h1>Historia Clínica</h1>
+		</div>
+		<div data-role="content">
+			<div data-role="collapsible-set  ui-field-contain">
+				<div data-role="collapsible"  data-collapsed="false"  data-mini="true">
+					<h4>Información paciente</h4>
+					<div class="infoPacient">
+					</div>
+				</div>
+			</div>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" class="clinicHistory">
+					<h4>Historia</h4>
+					<div class="contentHistory">
+						<ul data-role="listview" >
+						</ul>
+					</div>
+
+				</div>
+			</div>
+				<div data-role="collapsible" id="newConsult">
+					<h4>Nueva Consulta	</h4>
+					<form id="consultForm" data-role="collapsible-set" data-mini="true">
+						<div class="ui-field-contain" data-role="collapsible"   >
+							<h5>Motivo de la consulta:</h5>
+							<textarea name="consultsubject" id="consultsubject" cols="30" rows="10"  class="AAEM_required"></textarea></div>
+						<div class="ui-field-contain" data-role="collapsible" >
+							<h5>Enfermedad Actual:</h5>
+							<textarea name="consultactualdisease" id="consultactualdisease" cols="30" rows="10" class="AAEM_required" ></textarea>
+						</div>
+
+						<div class="ui-field-contain" data-role="collapsible" >
+							<h5>Antecedentes Personales:</h5>
+							<textarea name="consultpersonalrecord" id="consultpersonalrecord" cols="30" rows="10" class="AAEM_required"></textarea></div>
+
+						<div class="ui-field-contain" data-role="collapsible" >
+							<h5>Antecedentes Ginecoobstetricos</h5>						
+
+
+							<div class="ui-field-contain">
+								<label for="consultfum">FUM:</label>
+								<input type="text" data-role="date" name="consultfum" id="consultfum" placeholder="aaaa-mm-dd" >
+							</div>
+
+							<div class="ui-field-contain">
+								<label for="consultg">G:</label>
+								<input type="text" name="consultg" id="consultg" placeholder="G" >
+							</div>
+							<div class="ui-field-contain">
+								<label for="consultp">P:</label>
+								<input type="text" name="consultp" id="consultp" placeholder="P" >
+							</div>
+							<div class="ui-field-contain">
+								<label for="consulta">A:</label>
+								<input type="text" name="consulta" id="consulta" placeholder="A" >
+							</div>						
+							<div class="ui-field-contain">
+								<label for="consultc">C:</label>
+								<input type="text" name="consultc" id="consultc" placeholder="C" >
+							</div>
+							<div class="ui-field-contain">
+								<label for="consultv">V:</label>
+								<input type="text" name="consultv" id="consultv" placeholder="V" >
+							</div>
+							<div class="ui-field-contain">
+								<label for="consultgestage">Edad Gestacional:</label>
+								<input type="text" name="consultgestage" id="consultgestage" placeholder="Edad gestacional" >
+							</div>
+						</div>
+						<div class="ui-field-contain fisics" data-role="collapsible" >
+							<h5>Examenes Fisicos</h5>
+
+							<div class="ui-field-contain">
+								<label for="consultta">TA:</label>
+								<input type="text" name="consultta" id="consultta" placeholder="TA" class="AAEM_required">
+							</div>	
+
+							<div class="ui-field-contain">
+								<label for="consultsize">Talla:</label>
+								<input type="text" name="consultsize" id="consultsize" placeholder="Talla" class="AAEM_required">
+							</div>
+							<div class="ui-field-contain">
+								<label for="consultfc">FC:</label>
+								<input type="text" name="consultfc" id="consultfc" placeholder="FC" class="AAEM_required">
+							</div>
+
+							<div class="ui-field-contain">
+								<label for="consultfr">FR:</label>
+								<input type="text" name="consultfr" id="consultfr" placeholder="FR" class="AAEM_required">
+							</div>
+
+							<div class="ui-field-contain">
+								<label for="consultweight">PESO:</label>
+								<input type="text" name="consultweight" id="consultweight" placeholder="Peso" class="AAEM_required" >
+							</div>	
+
+							<div class="ui-field-contain">
+								<label for="consultimc">IMC:</label>
+								<input type="text" name="consultimc" id="consultimc" placeholder="IMC" class="AAEM_required">
+							</div>
+
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Conciencia:</h5>
+								<textarea name="consultawareness" id="consultawareness" cols="30" rows="10" class="AAEM_required"></textarea>							
+							</div>
+
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Cabeza, cara, cuello:</h5>
+								<textarea name="consulthead" id="consultahead" cols="30" rows="10" ></textarea>
+							</div>
+
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Cardio Pulmonar:</h5>
+								<textarea name="consultcardio" id="consultcardio" cols="30" rows="10" ></textarea>
+							</div>
+
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Abdomen:</h5>
+								<textarea name="consultabdomen" id="consultabdomen" cols="30" rows="10" ></textarea>
+							</div>
+							<div class="ui-field-contain">
+								<Label for="consultheight">Altura uterina</Label>
+								<input type="text" id="consultheight" name="consultheight" placeholder="Altura uterina">
+							</div>
+							<div class="ui-field-contain">
+								<Label for="consultfrecuency">Frecuencia cardiaca fetal</Label>
+								<input type="text" id="consultfrecuency" name="consultfrecuency" placeholder="Frecuencia cardiaca fetal">
+							</div>
+							<div class="ui-field-contain">
+								<Label for="consultactivity">Actividad uterina</Label>
+								<input type="text" id="consultactivity" name="consultactivity" placeholder="Actividad uterina">
+							</div>
+
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Tono:</h5>
+								<textarea name="consulttone" id="consulttone" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Presentación:</h5>
+								<textarea name="consultpresentation" id="consultpresentation" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Genitourinario:</h5>
+								<textarea name="consultgenit" id="consultgenit" cols="30" rows="10"></textarea>
+							</div>
+
+							<div class="ui-field-contain">
+								<Label for="consultdilatation">Dilatación:</Label>
+								<input type="text" id="consultdilatation" name="consultdilatation" placeholder="Dilatación">
+							</div>
+							<div class="ui-field-contain">
+								<Label for="consulteffacement">Borramiento:</Label>
+								<input type="text" id="consulteffacement" name="consulteffacement" placeholder="Borramiento">
+							</div>
+							<div class="ui-field-contain">
+								<Label for="consultestation">Estación:</Label>
+								<input type="text" id="consultestation" name="consultestation" placeholder="Estación">
+							</div>
+
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Estado de membranas:</h5>
+								<textarea name="consultmembranes" id="consultmembranes" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Liquido meconiado:</h5>
+								<textarea name="consultliquid" id="consultliquid " cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Sangrado:</h5>
+								<textarea name="consultblood" id="consultblood" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Extremidades:</h5>
+								<textarea name="consultarms" id="consultarms" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Sistema nervioso central:</h5>
+								<textarea name="consultnervous" id="consultnervous" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Diagnostico:</h5>
+								<textarea name="consultdiagnostic" id="consultdiagnostic" cols="30" rows="10" class="AAEM_required"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Plan:</h5>
+								<textarea name="consultplan" id="consultplan" cols="30" rows="10" class="AAEM_required"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Paraclínicos:</h5>
+								<textarea name="consultparaclinics" id="consultparaclinics" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" id="diag_images" align="center">
+								<h5>Imágenes diagnosticas:</h5>
+								<img src="img/camera.png" alt="" id="openCamera" >
+								<img src="img/galery.png" alt="" id="openGalery">
+								<div id="savedImages">
+
+								</div>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Motivo de la interconsulta:</h5>
+								<textarea name="consultintersubject" id="consultintersubject" cols="30" rows="10" class="AAEM_required"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Respuesta:</h5>
+								<textarea name="consultresponse" id="consultresponse" cols="30" rows="10"></textarea>
+							</div>
+							<div class="ui-field-contain" data-role="collapsible" >
+								<h5>Evolución:</h5>
+								<textarea name="consultevolution" id="consultevolution" cols="30" rows="10"></textarea>
+							</div>
+
+
+						</div>
+
+						<div id="photos" style="display:none">
+
+						</div>
+
+						<label>
+					        <input type="checkbox" name="consulturgency" id="consulturgency" data-mini="true">Urgencia
+					    </label>
+
+
+
+						<a  data-role="button"  data-icon="delete" class="formLeft ui-btn ui-mini saveHistory">Guardar</a>
+
+
+
+					</form>
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+
+	</div>
+
+	<div data-role="page" id="searchspec" >
+
+		<div data-role="popup" id="individualSpec" class="ui-content" data-theme="a" style="margin-top:10px" >
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Cerrar</a>
+			<div class="ui-field-contain">
+				<h3></h3>
+				<h4></h4>		
+				<p></p>
+				<p></p>
+			</div>
+			<div style="height: 80px;" class="ui-field-contain">
+				<div>Desea solicitar la ayuda de este especialista?</div>
+				<a class=" ui-btn ui-mini " data-rel="back" style="float:left; width: 32% !important;">No</a>
+				<button class=" ui-btn ui-mini requestHelp" style="float:right; width: 46% !important;">Si</button>
+			</div>
+
+
+
+		</div>
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="options4">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+
+		<div data-role="header" data-position="fixed">
+			<a href="#options4" data-icon="info" class="ui-btn-right">Mas</a>
+			<a href="#search" data-icon="back" class="ui-btn-left">Atras</a>			
+
+			<h1>Selecciona Especialidad</h1>
+		</div>
+
+		<div data-role="content">
+
+			<ul id="specFilter" data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Buscar especialidad" data-inset="true" class="ui-field-contain">
+				<li><a class="specialityList" href="#" espec="Ginecólogo">Ginecólogo</a></li>
+				<li><a class="specialityList" href="#" espec="Ginecóbstetra">Ginecóbstetra</a></li>
+				<li><a class="specialityList" href="#" espec="Pediatria">Pediatria</a></li>
+				<li><a class="specialityList" href="#" espec="Neurología">Neurología</a></li>
+				<li><a class="specialityList" href="#" espec="Nutricion">Nutricion</a></li>
+				<li><a class="specialityList" href="#" espec="Neumología">Neumología</a></li>
+				<li><a class="specialityList" href="#" espec="Toxicología">Toxicología</a></li>
+			</ul>
+
+			<div class="ui-field-contain" id="specs">
+			</div>
+		</div>
+	</div>
+
+
+
+	<div data-role="page" id="myRequest">
+
+
+
+
+		<div data-role="popup" id="individualRequest" class="ui-content" data-theme="a" style="margin-top:10px" >
+			<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Cerrar</a>
+			<div class="ui-field-contain">
+				<h3></h3>
+				<h4></h4>		
+				<p></p>
+				<p></p>
+			</div>
+			<div style="height: 80px;" class="ui-field-contain">
+				<div>Desea solicitar la ayuda de este especialista?</div>
+				<a class=" ui-btn ui-mini " data-rel="back" style="float:left; width: 32% !important;">No</a>
+				<button onclick="requestHelp(this)" class=" ui-btn ui-mini " style="float:right; width: 46% !important;">Si</button>
+			</div>
+		</div>
+
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="options5">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+
+		<div data-role="header" data-position="fixed">
+			<a href="#options5" data-icon="info" class="ui-btn-right">Mas</a>
+			<a href="#myRequest" data-icon="back" class="ui-btn-left">Atras</a>			
+			<h1>Solicitudes</h1>
+		</div>
+		<div data-role="content">
+
+		    <select id="activeUser" name="flip-1" data-role="slider"  data-mini="true">
+		        <option value="0">Inactivo</option>
+		        <option value="1">Activo</option>
+		    </select>
+
+			<div class="ui-field-contain" id="requestMedics">
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div data-role="page" id="detailsRequest">
+
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="options3">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+
+		<div data-role="header" data-position="fixed">
+			<a href="#options3" data-icon="info" class="ui-btn-right">Mas</a>
+			<a href="#myRequest" data-icon="back" class="ui-btn-left">Atras</a>			
+
+			<h1>Historia Clínica</h1>
+		</div>
+		<div data-role="content">
+
+
+			<div data-role="collapsible-set  ui-field-contain">
+				<div data-role="collapsible"  data-collapsed="false"  data-mini="true">
+					<h4>Información paciente</h4>
+					<div class="infoPacient">
+					</div>
+				</div>
+			</div>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" class="clinicHistory">
+					<h4>Historia</h4>
+					<div class="contentHistory">
+						<ul data-role="listview" >
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<div id="box_sugerencia"class="ui-body ui-body-a	">
+				<p>Desea ayudar al doctor <strong id="nameGeneralDoctor">Jorge Martinez</strong> con este paciente?</p>
+				
+				<a href="#" id="declineChat" data-role="button"  data-iconpos="left" data-mini="true" data-inline="true">Cancelar</a>
+				<a href="" id="initChat" data-role="button"  data-iconpos="right" data-mini="true" data-inline="true">Iniciar chat</a>
+
+			</div>
+			
+
+
+
+		</div>
+	</div>
+
+
+
+	<div data-role="page" id="chat">
+
+		<div data-role="popup" id="popupPreviewChat" class="popupPreview" data-overlay-theme="b" data-theme="b" data-corners="false">
+		    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<!-- <img class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France"> -->
+		</div>
+
+		<div data-role="popup" id="diagnosticoSpec">
+		        <div style="padding:10px;">
+		            <h4>Diagnostico principal</h4>
+					<ul id="principalDiagnostic" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Codigo o diagnostico" data-filter-theme="a"></ul>
+		            <h4>Diagnostico secundario</h4>
+					<ul id="secondaryDiagnostic" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Codigo o diagnostico" data-filter-theme="a"></ul>
+		            <h4>Diagnostico adicional</h4>
+					<ul id="addtitionalDiagnostic" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Codigo o diagnostico" data-filter-theme="a"></ul>
+					<a href="#" id="saveDiagnostic"  data-role="button"  data-iconpos="left" data-mini="true" data-inline="true">Diagnosticar</a>
+		        </div>
+		</div>
+		<style>
+		.ui-filter-inset {
+		    margin-top: 0;
+		}
+		</style>
+
+		<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="optionschatspec">
+			<a data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cerrar</a>
+		</div>
+		<div data-role="popup" id="positionOrigin" class="ui-content" data-theme="a">
+		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<a href="#" id="openChatCamera" class="ui-btn ui-shadow ui-corner-all ui-icon-camera ui-btn-icon-notext"></a>
+		<a href="#" id="openChatGalery" class="ui-btn ui-shadow ui-corner-all ui-icon-cloud ui-btn-icon-notext"></a>
+		</div>
+
+		<div data-role="header" data-position="fixed">
+			<a href="#optionschatspec" data-icon="info" class="ui-btn-right">Mas</a>
+			<a href="#myRequest" id="backButtonChat" data-icon="back" class="ui-btn-left">Atras</a>
+			
+			<h1>Chat</h1>
+		</div>
+		<div data-role="content">
+
+			<div class="backgroundChat">
+				<div class="nameDoctor"></div>
+				
+				<div id="chatContainer">
+					<table id="chatMessages">
+						<tbody></tbody>
+					</table>				
+
+						
+				</div>
+				<div class="chatText">				
+					<table>
+						<tr>
+							<td><textarea name="" id="textchat" cols="100" rows="1" onkeypress="return chatEnterScript(event);"></textarea></td>
+							<td><a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-comment ui-btn-icon-notext" id="sendChatMessage" ></a></td>
+							<td><a href="#positionOrigin" class="ui-btn ui-shadow ui-corner-all ui-icon-plus ui-btn-icon-notext"  data-rel="popup" data-position-to="origin"></a></td>
+						</tr>
+					</table>	
+				</div>
+			</div>
+			<div>
+
+			</div>			
+			<a href="#"  data-role="button"  data-iconpos="left" data-mini="true" data-inline="true" class="endChat">Terminar</a>
+			<div data-role="collapsible-set  ui-field-contain">
+				<div data-role="collapsible"  data-collapsed="false"  data-mini="true">
+					<h4>Información paciente</h4>
+					<div class="infoPacient">
+					</div>
+				</div>
+			</div>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible-set">
+					<div data-role="collapsible" class="clinicHistory">
+						<h4>Historia</h4>
+						<div class="contentHistory">
+							<ul data-role="listview" >
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

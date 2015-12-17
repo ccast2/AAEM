@@ -1,0 +1,323 @@
+@font-face { font-family: GeosansLight;
+src: url(GeosansLight.ttf) format('truetype');}
+
+
+
+span.ui-slider-label.ui-slider-label-a.ui-btn-active {
+    background: green;
+}
+span.ui-slider-label.ui-slider-label-b {
+    background: red;
+    color: white;
+}
+
+#diagnosticoSpec li {
+	    border: 1px solid #F6DCB9;
+	    background: whitesmoke;
+}
+@font-face
+{
+font-family: gotham;
+src: url(../fonts/Gotham/GothamHTF-Medium.otf);
+}
+
+{
+font-family: helveticN;
+src: url(../fonts/Helvetica/HelveticaNeueLTPro-Md.otf);
+}
+
+.formLeft{
+
+	width: 40% !important;
+	margin-left: 49%;
+
+
+}
+
+.wrong{
+	
+	border: 1px solid red !important;
+
+
+}
+
+
+/*login*/
+
+#loginForm{
+margin: 0 auto;
+margin-top: 15px;
+width: 80%;
+}
+
+#login>[data-role="content"]>img {
+margin: 0 auto;
+display: block;
+width: 77%;
+margin-top: 16%;
+margin-bottom: 32px;
+}
+
+
+.textLogin{
+text-align: center;
+text-shadow: none;
+font-family: helvetica;
+font-weight: bold;
+font-size: 1.2em;
+}
+
+.black{
+
+color: black;
+margin-top: 5px;
+
+
+}
+
+.red{
+
+color: #EC1F27;
+	
+}
+
+
+
+#login [data-role="content"]{
+
+	background-color: transparent;
+	border: 0px solid white;
+
+}
+
+#login {
+background-image: url("../img/backgroundLogin.png");
+background-size: 100%;
+background-color: #F6DCB9;
+background-repeat: no-repeat;
+}
+
+#loginForm label{
+
+		color: white;
+text-shadow: 0px 0px black;
+
+}
+#loginForm input{
+
+		font-weight: bold;
+		font-size: 0.9em;
+		padding-top: 11px;
+		padding-bottom: 11px;
+		
+
+
+}
+
+.imageHistory{
+
+	width: 19%;
+	margin-left: 1%;
+	float: left;
+
+
+}
+
+#chatContainer{overflow: scroll}
+#chatContainer table {
+    padding: 5px;
+    width: 100%;
+    border-spacing: 0px 3px;
+}
+#chatContainerGEN{overflow: scroll}
+#chatContainerGEN table{
+
+	padding: 25px;
+	width: 100%;
+
+
+}
+.hide{
+
+	display: none;
+
+}
+.yourchat {
+    color: black;
+    padding: 6px;
+    border-radius: 5px;
+    float: left;
+    border-top-left-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+}
+.mychat {
+    color: black;
+    padding: 6px;
+    border-radius: 5px;
+    float: right;
+    border-top-right-radius: 0px;
+    background-color: rgba(255, 255, 255, 0.7);
+    background: rgba(230, 255, 255, 0.7);
+    font-size: 0.9em;
+}
+
+#textchat{
+	font-size: 0.9em;
+}
+
+.buttonLogin{
+	color: white !important;
+	background-color: #EC1F27!important;
+	border: 0px!important;
+	text-shadow: 0px 0px black !important;;
+	font-family: gotham;
+
+
+}
+
+.dateMessage {
+        font-size: 0.6em;
+}
+.nameDoctor {
+    padding: 2px;
+    padding-left: 7px;
+    background: rgba(255, 255, 255, 0.7);
+    border-bottom: 2px solid white;
+}
+#loginForm .ui-input-text{
+
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+}
+
+.rights {
+margin: 0 auto;
+width: 200px;
+margin-top: 15%;
+}
+
+/*pacient*/
+
+
+#searchForm {
+margin-top: 35px;
+}
+
+
+/*Register*/
+
+
+.halfSizeTi{
+	width: 33%;
+	float: left;
+}
+
+.halfSizeInput {
+width: 63%;
+float: right;
+}
+
+
+body [data-role="content"]{
+padding: 6%;
+width: 88%;
+}
+
+.ui-listview>.ui-li-static {
+
+	white-space: inherit;
+
+}
+
+body [data-role="header"] h1{
+text-shadow: none;
+
+}
+
+
+.imgspec{
+
+
+width: 16px;
+padding: 10px;
+	
+}
+
+
+#openCamera,#openGalery {
+width: 50px;
+margin-right: 10px;
+margin-left: 10px;
+}
+#savedImages a.ui-link {
+    margin: 3px;
+}
+#savedImages img,.popphoto {
+    width: 30%;
+    margin: 3px;
+}
+
+
+
+#chatContainer {
+	width: 100%;
+    height: 200px;
+    overflow-x: hidden;
+}
+.backgroundChat{
+    border: 1px solid white;
+    background-image: url(../img/backgroundLogin.png);
+    background-size: 100%;
+
+}
+.chatText {
+    padding: 4px;
+}
+
+.leftChat {
+    background-image: url(../img/leftChat.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 10px;
+}
+.rightChat {
+    background-image: url(../img/rightChat.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 10px;
+}
+
+#chatContainerGEN {
+width: 100%;
+height: 200px;
+border: 1px solid black;
+}
+
+
+.ui-loader-background {
+    width:100%;
+    height:100%;
+    top:0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display:none;
+    position: fixed;
+    z-index:100;
+}
+
+.ui-loading .ui-loader-background {
+    display:block;
+}
+
+img.imgspec {
+    -moz-border-radius: 50% !important;
+    -webkit-border-radius: 50% !important;
+     border-radius: 50% !important;
+}
+
+.ui-slider.ui-slider-switch.ui-slider-track.ui-shadow-inset.ui-bar-inherit.ui-corner-all.ui-mini {
+    width: 50%;
+}

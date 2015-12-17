@@ -1,0 +1,12 @@
+@media screen and (max-width:320px)
+{
+
+#login > [data-role="content"] > img {
+
+
+	width: 64%;
+	margin-bottom: 14px;
+}
+
+
+}
