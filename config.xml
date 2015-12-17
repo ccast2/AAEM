@@ -2,13 +2,13 @@
     
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "co.gov.atlantico.aaemprod"  
+        id          = "co.gov.atlantico.aaem"  
         versionCode = "25" 
         version     = "1.5.2" >
         <!--         
         co.gov.atlantico.aaemprod playstore
         co.gov.atlantico.aaem appstore -->
-        <platform name="android" />
+        <!-- <platform name="android" /> -->
 
 
         <name>AAEM</name>
