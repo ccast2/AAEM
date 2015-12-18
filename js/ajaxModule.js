@@ -28,21 +28,6 @@ function ajaxModule () {
 			}
 		});
 	}
-
-	this.ajaxSession = function (type,data,successCallback) {
-
-		data = updateData(data);
-
-		$.post( server + configuration.requestTypes[type].serverFunction,
-			data,
-			function( response ) {
-				if (session){
-					successCallback(type,response);
-				}
-			},
-			"json");
-	}
-
 	this.ajaxSearchPAcient = function (idPacient,type) {
 
 		data = {idpacient:idPacient};
