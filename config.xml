@@ -28,9 +28,7 @@
         <!-- Habilita las notificaciones dentro de la aplicacion -->
         <gap:plugin name="nl.x-services.plugins.toast"/>
         <!-- Habilita la conexion a internet -->
-        <gap:plugin name="cordova-plugin-whitelist" source="npm" /> 
-        <!-- Cubre la barra de estado en ios -->
-        <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay"/>
+        <gap:plugin name="cordova-plugin-whitelist" source="npm" />
         <!-- Vibracion en el dispositivo -->        
         <gap:plugin name="org.apache.cordova.vibration" />
         <!-- Integra las notificaciones por PUSH  (APN y GCM) -->
@@ -44,13 +42,7 @@
         <!-- Permite la manipulacion de las fotos -->
         <plugin name="cordova-plugin-file" spec="3.0.0" source="pgb" />
         <plugin name="cordova-plugin-file-transfer" spec="1.3.0" source="pgb" />
-        <!-- 
-        <gap:plugin name="de.appplant.cordova.plugin.local-notification" /> 
-        <gap:plugin name="de.appplant.cordova.plugin.background-mode" /> 
-        -->
-
-
-
+        
         <!-- android -->
         <icon src="res/android/mipmap-mdpi/ic_launcher.png" platform="android" qualifier="ldpi" />
         <icon src="res/android/mipmap-mdpi/ic_launcher.png" platform="android" qualifier="mdpi" />
@@ -65,45 +57,6 @@
         <gap:splash gap:density="hdpi" gap:platform="android" src="res/android/splash/HDPI.png" />
         <gap:splash gap:density="xhdpi" gap:platform="android" src="res/android/splash/XHDPI.png" />
 
-
-        
-        <!-- iPhone 6 / 6+ -->
-        <icon src="res/ios/icons/icon-60@3x.png" platform="ios" width="180" height="180" />
-        <!-- iPhone / iPod Touch  -->
-        <icon src="res/ios/icons/icon-60.png" platform="ios" width="60" height="60" />
-        <icon src="res/ios/icons/icon-60@2x.png" platform="ios" width="120" height="120" />
-        <!-- iPad -->
-        <icon src="res/ios/icons/icon-76.png" platform="ios" width="76" height="76" />
-        <icon src="res/ios/icons/icon-76@2x.png" platform="ios" width="152" height="152" />
-        <!-- Settings Icon -->
-        <icon src="res/ios/icons/icon-small.png" platform="ios" width="29" height="29" />
-        <icon src="res/ios/icons/icon-small@2x.png" platform="ios" width="58" height="58" />
-        <!-- Spotlight Icon -->
-        <icon src="res/ios/icons/icon-40.png" platform="ios" width="40" height="40" />
-        <icon src="res/ios/icons/icon-40@2x.png" platform="ios" width="80" height="80" />
-
-        <icon src="res/ios/icons/icon-57.png" platform="ios" width="57" height="57" />
-        <icon src="res/ios/icons/icon-72.png" platform="ios" width="72" height="72" />
-
-
-
-
-
-
-        <!-- splash -->
-
-        <!-- iPhone and iPod touch -->
-        <splash src="res/ios/splash/Default.png" platform="ios" width="320" height="480" />
-        <splash src="res/ios/splash/Default@2x.png" platform="ios" width="640" height="960" />
-        <!-- iPhone 5 / iPod Touch (5th Generation) -->
-        <splash src="res/ios/splash/Default-568h@2x.png" platform="ios" width="640" height="1136" />
-        <!-- iPhone 6 -->
-        <splash src="res/ios/splash/Default-667h@2x.png" platform="ios" width="750" height="1334" />
-        <splash src="res/ios/splash/Default-Portrait-736h@3x.png" platform="ios" width="1242" height="2208" />
-        <!-- iPad -->
-        <splash src="res/ios/splash/Default-Portrait.png" platform="ios" width="768" height="1024" />
-        <!-- Retina iPad -->
-        <splash src="res/ios/splash/Default-Portrait@2x.png" platform="ios" width="1536" height="2048" />
 
         <access origin="*" />
         <allow-navigation href="*" />
