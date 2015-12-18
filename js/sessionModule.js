@@ -20,7 +20,7 @@ function session (argument) {
 		token = this.token;
 		customDevice = this.customDevice;
 		
-		postServer = ajaxModule.ajaxSession(0,{username:username,pass:password},session.ajaxResponse);
+		postServer = ajaxModule.request(0,{username:username,pass:password},session.ajaxResponse);
 
 	}
 
@@ -40,7 +40,6 @@ function session (argument) {
 			session[attrib] = mySession[attrib];
 		}
 		$("#activeUser").val(session.active).change();
-		console.log("session.active");
 		ajaxModule.validateSession({},20);
 	}
 
@@ -83,9 +82,9 @@ function session (argument) {
 		var state 		= null; 
 	}
 
-	this.ajaxResponse = function (type,data) {
+	this.ajaxResponse = function (data) {
 		
-		if (parseInt(data.error) == 0 && type == 0) {
+		if (parseInt(data.error) == 0) {
 
 			session.idUser 		= data.id;
 			session.username 	= data.username;

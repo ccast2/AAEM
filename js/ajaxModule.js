@@ -5,6 +5,30 @@ function ajaxModule () {
 	var sesId 	= session.sesId;
 	var server 	= configuration.server;
 
+	this.request = function (type,data,requestCallback) {
+
+		data = updateData(data);
+		$.ajax({
+			type: "POST",
+			url: server + configuration.requestTypes[type].serverFunction,
+			data: data,
+			dataType: 'json',
+			success: function(response){
+				var error = parseInt(response.error);
+				if (error == 1) {
+					notifications.toast(configuration.errorCodes[error].message);
+					configuration.customChangePage('#login');
+				}else{
+					requestCallback(response);
+				}
+			    
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+			 notifications.toast(configuration.errorCodes[12].message);
+			}
+		});
+	}
+
 	this.ajaxSession = function (type,data,successCallback) {
 
 		data = updateData(data);

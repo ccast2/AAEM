@@ -539,3 +539,5 @@ $(document).on("click", ".toPreview", function(event) {
 
   
  });
+
+$.mobile.defaultPageTransition = 'slidefade';
