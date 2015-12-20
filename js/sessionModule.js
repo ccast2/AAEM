@@ -55,7 +55,6 @@ function session (argument) {
 
 		ajaxModule.validateSession({},20);
 	}
-
 	this.saveSession = function (argument) {
 		session.deleteSession();
 		localStorage.setItem('session', JSON.stringify({idUser:this.idUser,
