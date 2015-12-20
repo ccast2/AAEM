@@ -1,14 +1,13 @@
 var chatInterval;
-function chat(idRequest,idRecord,idSpec,idGen)
+function chat(idRequest,idRecord)
 {
 	this.idRequest 		= idRequest;
 	this.idRecord 		= idRecord;
-	this.idSpec 		= idSpec;
-	this.idGen 			= idGen;
-	this.bloqueada 		= false;
+	this.blocked 		= false;
 	this.messages 		= [];
 	this.latency		= 3;
-	this.nameGen 		= '';
+	this.nameDoctor 	= '';
+	this.locationDoctor 	= '';
 
 	this.reboot = function () {
 		$("#chatMessages tbody").html("");

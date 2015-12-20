@@ -40,7 +40,19 @@ function session (argument) {
 			session[attrib] = mySession[attrib];
 		}
 		$("#activeUser").val(session.active).change();
-		console.log("session.active");
+		var page 	 = (session.rol == 'ESP')?'#myRequest':'#search';
+		session.page = page;
+
+		if(localStorage.getItem('chat')){
+			for(attrib in myChat){
+				chat[attrib] = myChat[attrib];
+			}
+			if (!chat.blocked) {
+				session.page = 'chat';
+
+			};
+		}
+
 		ajaxModule.validateSession({},20);
 	}
 
@@ -61,8 +73,17 @@ function session (argument) {
 							customDevice:this.customDevice,
 							page:this.page
 							}));
-		if ($.mobile.activePage.attr('chat')) {
-			
+		if ($.mobile.activePage.attr('id') == 'chat') {
+
+			localStorage.setItem('chat',JSON.stringify({
+				idRequest		: chat.idRequest,
+				idRecord		: chat.idRecord,
+				blocked			: chat.blocked,
+				messages		: chat.messages,
+				latency			: chat.latency,
+				nameDoctor		: chat.nameDoctor,
+				locationDoctor	: chat.locationDoctor
+				}));
 		};
 	};
 
@@ -104,7 +125,6 @@ function session (argument) {
 			$("#activeUser").val(session.active).change();
 
 			document.getElementById('loginForm').reset();
-
 
 			if ( parseInt(data.reset_pass) == 1) {
 				$("#popUpReset").popup('open');

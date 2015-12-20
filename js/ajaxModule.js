@@ -190,8 +190,8 @@ function ajaxModule () {
 						configuration.customChangePage('#login');
 					}
 				}else{
-					var page = (session.rol == 'ESP')?'#myRequest':'#search';
-					configuration.customChangePage(page);
+					
+					configuration.customChangePage(session.page);
 					enablePush();
 				}
 			},
@@ -235,6 +235,9 @@ function ajaxModule () {
 
 					var user = response.users[0];
 					$('.nameDoctor').html(user.name + ' -- ' + user.location);
+					chat.nameDoctor = user.name;
+					chat.locationDoctor = user.location;
+
 
 				}
 			},
