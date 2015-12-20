@@ -10,6 +10,19 @@ function chat(idRequest,idRecord)
 	this.locationDoctor 	= '';
 	this.idPacient		= null;
 
+	this.cleanChat = function (argument) {
+
+	this.idRequest 		= null;
+	this.idRecord 		= null;
+	this.blocked 		= false;
+	this.messages 		= [];
+	this.latency		= 3;
+	this.nameDoctor 	= '';
+	this.locationDoctor 	= '';
+	this.idPacient		= null;
+		
+	}
+
 	this.reboot = function () {
 		$("#chatMessages tbody").html("");
 		this.latency = 3;

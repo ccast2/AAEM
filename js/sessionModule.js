@@ -54,7 +54,7 @@ function session (argument) {
 				chat.getNewMessages();
 
 			}else{
-				chat = new chat();
+				chat.cleanChat();
 			}
 		}
 

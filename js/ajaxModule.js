@@ -227,8 +227,8 @@ function ajaxModule () {
 			function( response ) {
 				var error = parseInt(response.error);
 				if (error>0) {
-					notifications.toast(configuration.errorCodes[error].message);
 					if (error == 1) {
+						notifications.toast(configuration.errorCodes[error].message);
 						configuration.customChangePage('#login');
 					}
 				}else{
