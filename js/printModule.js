@@ -89,7 +89,7 @@ function printModule () {
 	}
 	this.updateHistory = function (data) {
 		$("#historyList [data-id]").html("");
-		$("#responseContainer table tbody").html();
+		$("#responseContainer table tbody").html("");
 		$("#historyList [data-id='diagnostic']").append('<br/><h3>Diagnostico Medico General</h3>')
 		for(var key in data) {
 		    var value = data[key];
@@ -143,6 +143,10 @@ function printModule () {
 			'uploads/' +
 			currentData.message +
 			'" alt="Imagen diagnostica" ></a>';
+
+			}else if (parseInt(currentData.image) == 2) {
+
+				chat.blocked = true;
 
 			};
 			if (session.idUser == currentData.iduser) {

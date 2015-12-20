@@ -155,7 +155,7 @@ function recordsModule () {
 
 		var error = false;
 	    $(".AAEM_required").each(function(index,element){
-	    	// $(element).val("Dato de prueba");
+	    	$(element).val("Prueba chat");
 	        if ($(element).val()=="") {
 	        	$(element).addClass("wrong");
 	        	$(element).parents(".ui-field-contain").find("h5").addClass("wrong");

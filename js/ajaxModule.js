@@ -190,8 +190,8 @@ function ajaxModule () {
 						configuration.customChangePage('#login');
 					}
 				}else{
-					var page = (session.rol == 'ESP')?'#myRequest':'#search';
-					configuration.customChangePage(page);
+					
+					configuration.customChangePage(session.page);
 					enablePush();
 				}
 			},
@@ -227,14 +227,17 @@ function ajaxModule () {
 			function( response ) {
 				var error = parseInt(response.error);
 				if (error>0) {
-					notifications.toast(configuration.errorCodes[error].message);
 					if (error == 1) {
+						notifications.toast(configuration.errorCodes[error].message);
 						configuration.customChangePage('#login');
 					}
 				}else{
 
 					var user = response.users[0];
 					$('.nameDoctor').html(user.name + ' -- ' + user.location);
+					chat.nameDoctor = user.name;
+					chat.locationDoctor = user.location;
+
 
 				}
 			},

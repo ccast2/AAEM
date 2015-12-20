@@ -40,10 +40,26 @@ function session (argument) {
 			session[attrib] = mySession[attrib];
 		}
 		$("#activeUser").val(session.active).change();
-		console.log("session.active");
+		var page 	 = (session.rol == 'ESP')?'#myRequest':'#search';
+		session.page = page;
+		var myChat =  localStorage.getItem('chat');
+		var myChat = JSON.parse(myChat);
+		if(localStorage.getItem('chat')){
+			for(attrib in myChat){
+				chat[attrib] = myChat[attrib];
+			}
+			if (!chat.blocked) {
+				tmpPacient = new pacientModule(chat.idPacient);
+				session.page = '#chat';
+				chat.getNewMessages();
+
+			}else{
+				chat.cleanChat();
+			}
+		}
+
 		ajaxModule.validateSession({},20);
 	}
-
 	this.saveSession = function (argument) {
 		session.deleteSession();
 		localStorage.setItem('session', JSON.stringify({idUser:this.idUser,
@@ -61,6 +77,18 @@ function session (argument) {
 							customDevice:this.customDevice,
 							page:this.page
 							}));
+		if ($.mobile.activePage.attr('id') == 'chat') {
+
+			localStorage.setItem('chat',JSON.stringify({
+				idRequest		: chat.idRequest,
+				idRecord		: chat.idRecord,
+				blocked			: chat.blocked,
+				latency			: chat.latency,
+				nameDoctor		: chat.nameDoctor,
+				locationDoctor	: chat.locationDoctor,
+				idPacient		: chat.idPacient
+				}));
+		};
 	};
 
 	this.deleteSession = function (argument) {
@@ -101,7 +129,6 @@ function session (argument) {
 			$("#activeUser").val(session.active).change();
 
 			document.getElementById('loginForm').reset();
-
 
 			if ( parseInt(data.reset_pass) == 1) {
 				$("#popUpReset").popup('open');
