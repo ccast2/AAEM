@@ -61,6 +61,9 @@ function session (argument) {
 							customDevice:this.customDevice,
 							page:this.page
 							}));
+		if ($.mobile.activePage.attr('chat')) {
+			
+		};
 	};
 
 	this.deleteSession = function (argument) {
