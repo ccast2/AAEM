@@ -77,9 +77,10 @@ function chat(idRequest,idRecord)
 		console.log(response);	
 	}
 
-	this.writeMessage = function(){
-
-		var message = $('#textchat').val();
+	this.writeMessage = function(message){
+		if (message = null) {
+			var message = $('#textchat').val();
+		};
 		if (message != '') {
 			var sizeMessages = this.messages.length;
 			var dataPost = {idRequest:this.idRequest,idRecord:this.idRecord,message:message,sizeChat:sizeMessages};
@@ -156,7 +157,9 @@ function chat(idRequest,idRecord)
           $("#diagnosticoSpec").popup('open');
 
       }else{
-        configuration.customChangePage("#search");        
+        configuration.customChangePage("#search");
+        chat.blocked = true;
+        chat.writeMessage('Chat finalizado');
       }
     };
 

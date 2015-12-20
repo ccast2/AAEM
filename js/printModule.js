@@ -144,6 +144,10 @@ function printModule () {
 			currentData.message +
 			'" alt="Imagen diagnostica" ></a>';
 
+			}else if (parseInt(currentData.image) == 2) {
+
+				chat.blocked = true;
+
 			};
 			if (session.idUser == currentData.iduser) {
 				$("#chatContainer table tbody").append("<tr class='hide'><td></td><td class='mychat' >" + currentData.message+ " <div class='dateMessage'>" + currentData.date + "</div></td><td class='rightChat'></td></tr>");

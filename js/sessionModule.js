@@ -51,6 +51,7 @@ function session (argument) {
 			if (!chat.blocked) {
 				tmpPacient = new pacientModule(chat.idPacient);
 				session.page = '#chat';
+				chat.getNewMessages();
 
 			};
 		}

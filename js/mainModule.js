@@ -178,6 +178,7 @@ $( document ).on( "pageshow", "#chat", function() {
     data = {idRequest:chat.idRequest,rol:session.rol};
     ajaxModule.ajaxGetInfoUser(data,18);
     chat.setMessagesInterval();
+    chat.getNewMessages();
     if (session.rol == 'ESP') {
       $("#backButtonChat").attr("href",'#myRequest');
     }else{
@@ -439,6 +440,9 @@ function saveDiagnostic () {
           }
         }else{
            configuration.customChangePage("#myRequest");
+           chat.blocked = true;
+           chat.writeMessage('Chat finalizado');
+
 
 
         }
