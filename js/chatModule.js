@@ -8,6 +8,7 @@ function chat(idRequest,idRecord)
 	this.latency		= 3;
 	this.nameDoctor 	= '';
 	this.locationDoctor 	= '';
+	this.idPacient		= null;
 
 	this.reboot = function () {
 		$("#chatMessages tbody").html("");

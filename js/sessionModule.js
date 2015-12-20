@@ -42,13 +42,15 @@ function session (argument) {
 		$("#activeUser").val(session.active).change();
 		var page 	 = (session.rol == 'ESP')?'#myRequest':'#search';
 		session.page = page;
-
+		var myChat =  localStorage.getItem('chat');
+		var myChat = JSON.parse(myChat);
 		if(localStorage.getItem('chat')){
 			for(attrib in myChat){
 				chat[attrib] = myChat[attrib];
 			}
 			if (!chat.blocked) {
-				session.page = 'chat';
+				tmpPacient = new pacientModule(chat.idPacient);
+				session.page = '#chat';
 
 			};
 		}
@@ -81,7 +83,8 @@ function session (argument) {
 				messages		: chat.messages,
 				latency			: chat.latency,
 				nameDoctor		: chat.nameDoctor,
-				locationDoctor	: chat.locationDoctor
+				locationDoctor	: chat.locationDoctor,
+				idPacient		: chat.idPacient
 				}));
 		};
 	};

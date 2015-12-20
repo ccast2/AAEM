@@ -164,6 +164,7 @@ function onDevicePlatform() {
 $( document ).on( "pageshow", "#history,#detailsRequest,#chat", function() {
 
     ajaxModule.ajaxGetInfoPAcient(tmpPacient.id,1);
+    chat.idPacient = tmpPacient.id;
 
   $('.clinicHistory').on('collapsibleexpand', function (){
 
