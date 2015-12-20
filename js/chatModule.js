@@ -78,7 +78,7 @@ function chat(idRequest,idRecord)
 	}
 
 	this.writeMessage = function(message){
-		if (message = null) {
+		if (!message) {
 			var message = $('#textchat').val();
 		};
 		if (message != '') {

@@ -53,7 +53,9 @@ function session (argument) {
 				session.page = '#chat';
 				chat.getNewMessages();
 
-			};
+			}else{
+				chat = new chat();
+			}
 		}
 
 		ajaxModule.validateSession({},20);
