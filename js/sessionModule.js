@@ -80,7 +80,6 @@ function session (argument) {
 				idRequest		: chat.idRequest,
 				idRecord		: chat.idRecord,
 				blocked			: chat.blocked,
-				messages		: chat.messages,
 				latency			: chat.latency,
 				nameDoctor		: chat.nameDoctor,
 				locationDoctor	: chat.locationDoctor,
