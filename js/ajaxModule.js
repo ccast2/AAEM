@@ -18,6 +18,7 @@ function ajaxModule () {
 			},
 			"json");
 	}
+
 	this.ajaxSearchPAcient = function (idPacient,type) {
 
 		data = {idpacient:idPacient};

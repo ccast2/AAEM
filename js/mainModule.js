@@ -490,7 +490,9 @@ function seeDiagnostic () {
 
 $( document ).on( "pageshow", function(event) {
   session.page = event.target.id;
-  session.saveSession();
+  if ($(event.target).attr("id") != 'login') {
+    session.saveSession();    
+  };
 });
 
 $( window ).load(function() {

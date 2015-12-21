@@ -144,7 +144,7 @@ function printModule () {
 			currentData.message +
 			'" alt="Imagen diagnostica" ></a>';
 
-			}else if (parseInt(currentData.image) == 2) {
+			}else if (parseInt(currentData.image) == 2 || currentData.message == 'Chat finalizado') {
 
 				chat.blocked = true;
 
