@@ -59,7 +59,7 @@
 
 
         <access origin="*" />
-        <allow-navigation href="*" />
+        <allow-navigation href="http://*/*" />
         <allow-intent href="*" />
         <preference name="orientation" value="portrait" />
         <preference name="webviewbounce" value="false" />

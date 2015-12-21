@@ -1,14 +1,27 @@
 var chatInterval;
-function chat(idRequest,idRecord,idSpec,idGen)
+function chat(idRequest,idRecord)
 {
 	this.idRequest 		= idRequest;
 	this.idRecord 		= idRecord;
-	this.idSpec 		= idSpec;
-	this.idGen 			= idGen;
-	this.bloqueada 		= false;
+	this.blocked 		= false;
 	this.messages 		= [];
 	this.latency		= 3;
-	this.nameGen 		= '';
+	this.nameDoctor 	= '';
+	this.locationDoctor 	= '';
+	this.idPacient		= null;
+
+	this.cleanChat = function (argument) {
+
+	this.idRequest 		= null;
+	this.idRecord 		= null;
+	this.blocked 		= false;
+	this.messages 		= [];
+	this.latency		= 3;
+	this.nameDoctor 	= '';
+	this.locationDoctor 	= '';
+	this.idPacient		= null;
+		
+	}
 
 	this.reboot = function () {
 		$("#chatMessages tbody").html("");
@@ -77,9 +90,10 @@ function chat(idRequest,idRecord,idSpec,idGen)
 		console.log(response);	
 	}
 
-	this.writeMessage = function(){
-
-		var message = $('#textchat').val();
+	this.writeMessage = function(message){
+		if (!message) {
+			var message = $('#textchat').val();
+		};
 		if (message != '') {
 			var sizeMessages = this.messages.length;
 			var dataPost = {idRequest:this.idRequest,idRecord:this.idRecord,message:message,sizeChat:sizeMessages};
@@ -156,7 +170,9 @@ function chat(idRequest,idRecord,idSpec,idGen)
           $("#diagnosticoSpec").popup('open');
 
       }else{
-        configuration.customChangePage("#search");        
+        configuration.customChangePage("#search");
+        chat.blocked = true;
+        chat.writeMessage('Chat finalizado');
       }
     };
 
