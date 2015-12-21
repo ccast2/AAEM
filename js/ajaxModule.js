@@ -5,28 +5,18 @@ function ajaxModule () {
 	var sesId 	= session.sesId;
 	var server 	= configuration.server;
 
-	this.request = function (type,data,requestCallback) {
+	this.ajaxSession = function (type,data,successCallback) {
 
 		data = updateData(data);
-		$.ajax({
-			type: "POST",
-			url: server + configuration.requestTypes[type].serverFunction,
-			data: data,
-			dataType: 'json',
-			success: function(response){
-				var error = parseInt(response.error);
-				if (error == 1) {
-					notifications.toast(configuration.errorCodes[error].message);
-					configuration.customChangePage('#login');
-				}else{
-					requestCallback(response);
+
+		$.post( server + configuration.requestTypes[type].serverFunction,
+			data,
+			function( response ) {
+				if (session){
+					successCallback(type,response);
 				}
-			    
 			},
-			error: function(XMLHttpRequest, textStatus, errorThrown) {
-			 notifications.toast(configuration.errorCodes[12].message);
-			}
-		});
+			"json");
 	}
 	this.ajaxSearchPAcient = function (idPacient,type) {
 
@@ -199,8 +189,8 @@ function ajaxModule () {
 						configuration.customChangePage('#login');
 					}
 				}else{
-					var page = (session.rol == 'ESP')?'#myRequest':'#search';
-					configuration.customChangePage(page);
+					
+					configuration.customChangePage(session.page);
 					enablePush();
 				}
 			},
@@ -236,14 +226,17 @@ function ajaxModule () {
 			function( response ) {
 				var error = parseInt(response.error);
 				if (error>0) {
-					notifications.toast(configuration.errorCodes[error].message);
 					if (error == 1) {
+						notifications.toast(configuration.errorCodes[error].message);
 						configuration.customChangePage('#login');
 					}
 				}else{
 
 					var user = response.users[0];
 					$('.nameDoctor').html(user.name + ' -- ' + user.location);
+					chat.nameDoctor = user.name;
+					chat.locationDoctor = user.location;
+
 
 				}
 			},

@@ -105,7 +105,7 @@
         <splash src="res/ios/splash/Default-Portrait@2x.png" platform="ios" width="1536" height="2048" />
 
         <access origin="*" />
-        <allow-navigation href="*" />
+        <allow-navigation href="http://*/*" />
         <allow-intent href="*" />
         <preference name="orientation" value="portrait" />
         <preference name="webviewbounce" value="false" />

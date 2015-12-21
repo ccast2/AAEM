@@ -164,6 +164,7 @@ function onDevicePlatform() {
 $( document ).on( "pageshow", "#history,#detailsRequest,#chat", function() {
 
     ajaxModule.ajaxGetInfoPAcient(tmpPacient.id,1);
+    chat.idPacient = tmpPacient.id;
 
   $('.clinicHistory').on('collapsibleexpand', function (){
 
@@ -177,6 +178,7 @@ $( document ).on( "pageshow", "#chat", function() {
     data = {idRequest:chat.idRequest,rol:session.rol};
     ajaxModule.ajaxGetInfoUser(data,18);
     chat.setMessagesInterval();
+    chat.getNewMessages();
     if (session.rol == 'ESP') {
       $("#backButtonChat").attr("href",'#myRequest');
     }else{
@@ -438,6 +440,9 @@ function saveDiagnostic () {
           }
         }else{
            configuration.customChangePage("#myRequest");
+           chat.blocked = true;
+           chat.writeMessage('Chat finalizado');
+
 
 
         }
@@ -485,6 +490,7 @@ function seeDiagnostic () {
 
 $( document ).on( "pageshow", function(event) {
   session.page = event.target.id;
+  session.saveSession();
 });
 
 $( window ).load(function() {
