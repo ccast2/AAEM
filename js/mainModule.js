@@ -179,6 +179,10 @@ $( document ).on( "pageshow", "#chat", function() {
     ajaxModule.ajaxGetInfoUser(data,18);
     chat.setMessagesInterval();
     chat.getNewMessages();
+    if (activeRecord.currentRecord) {
+      
+    chat.idRecord = activeRecord.currentRecord;
+    };
     if (session.rol == 'ESP') {
       $("#backButtonChat").attr("href",'#myRequest');
     }else{
@@ -454,7 +458,7 @@ function seeDiagnostic () {
   var record = activeRecord.idHistory;
   var data = {idUser: session.idUser,
               session_id: session.sessionId,
-              idhistory:record};
+              idhistory: chat.idRecord};
     $.post( configuration.server + configuration.requestTypes[11].serverFunction,
     data,
     function( response ) {
@@ -468,6 +472,7 @@ function seeDiagnostic () {
            var diagnostic = response.data.customDiagnostic;
            for (var i =  0; i < diagnostic.length; i++) {
             var val = diagnostic[i];
+            val.diagnostic = parseInt(val.diagnostic);
              if (val.diagnostic == '0') {
               $("#principalDiagnosticGen").html("<li data-id='"+val.id+"''>" + val.code + ": "+ val.description+"</li>");
              };
