@@ -165,6 +165,8 @@ $( document ).on( "pageshow", "#history,#detailsRequest,#chat", function() {
 
     ajaxModule.ajaxGetInfoPAcient(tmpPacient.id,1);
     chat.idPacient = tmpPacient.id;
+    data = {idRequest:chat.idRequest,rol:session.rol};
+    ajaxModule.ajaxGetInfoUser(data,18);
 
   $('.clinicHistory').on('collapsibleexpand', function (){
 

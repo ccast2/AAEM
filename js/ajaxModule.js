@@ -235,6 +235,7 @@ function ajaxModule () {
 
 					var user = response.users[0];
 					$('.nameDoctor').html(user.name + ' -- ' + user.location);
+					$('#nameGeneralDoctor').html(user.name);
 					chat.nameDoctor = user.name;
 					chat.locationDoctor = user.location;
 
