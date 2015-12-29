@@ -3,8 +3,8 @@
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "co.gov.atlantico.aaemprod"  
-        versionCode = "29" 
-        version     = "1.5.4" >
+        versionCode = "30" 
+        version     = "1.5.5" >
         <!--         
         co.gov.atlantico.aaemprod playstore
         co.gov.atlantico.aaem appstore 

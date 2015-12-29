@@ -165,6 +165,8 @@ $( document ).on( "pageshow", "#history,#detailsRequest,#chat", function() {
 
     ajaxModule.ajaxGetInfoPAcient(tmpPacient.id,1);
     chat.idPacient = tmpPacient.id;
+    data = {idRequest:chat.idRequest,rol:session.rol};
+    ajaxModule.ajaxGetInfoUser(data,18);
 
   $('.clinicHistory').on('collapsibleexpand', function (){
 
@@ -497,6 +499,11 @@ $( document ).on( "pageshow", function(event) {
   session.page = event.target.id;
   if ($(event.target).attr("id") != 'login') {
     session.saveSession();    
+  }else if ($(event.target).attr("id") == 'login') {
+     if (requestInterval) {clearInterval(requestInterval);};
+     if (requestTimeout) {clearTimeout(requestTimeout);};
+     if (requestInterval) {clearInterval(requestInterval);};
+     if (chatInterval) {clearInterval(chatInterval);};
   };
 });
 
