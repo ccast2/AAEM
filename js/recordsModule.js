@@ -158,7 +158,10 @@ function recordsModule () {
 	    	// $(element).val("Dato de prueba");
 	        if ($(element).val()=="") {
 	        	$(element).addClass("wrong");
-	        	$(element).parents(".ui-field-contain").find("h5").addClass("wrong");
+	        	$(element).parents(".ui-field-contain")[0]
+	        	var campo = $(element).parents(".ui-field-contain")[0];
+	        	$(campo).find("h5").addClass("wrong");
+	        	// $(element).parent().find("h5").addClass("wrong");
 	        	error = true
 	        };
 	    });	
