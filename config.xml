@@ -3,8 +3,8 @@
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "co.gov.atlantico.aaem"  
-        versionCode = "28" 
-        version     = "1.5.3" >
+        versionCode = "29" 
+        version     = "1.5.4" >
         <!--         
         co.gov.atlantico.aaemprod playstore
         co.gov.atlantico.aaem appstore -->
@@ -51,7 +51,7 @@
 
 
         <!-- android -->
-        <icon src="res/android/mipmap-mdpi/ic_launcher.png" platform="android" qualifier="ldpi" />
+<!--         <icon src="res/android/mipmap-mdpi/ic_launcher.png" platform="android" qualifier="ldpi" />
         <icon src="res/android/mipmap-mdpi/ic_launcher.png" platform="android" qualifier="mdpi" />
         <icon src="res/android/mipmap-hdpi/ic_launcher.png" platform="android" qualifier="hdpi" />
         <icon src="res/android/mipmap-xhdpi/ic_launcher.png" platform="android" qualifier="xhdpi" />
@@ -63,7 +63,7 @@
         <gap:splash gap:density="mdpi" gap:platform="android" src="res/android/splash/MDPI.png" />
         <gap:splash gap:density="hdpi" gap:platform="android" src="res/android/splash/HDPI.png" />
         <gap:splash gap:density="xhdpi" gap:platform="android" src="res/android/splash/XHDPI.png" />
-
+ -->
 
         
         <!-- iPhone 6 / 6+ -->
