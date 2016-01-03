@@ -165,6 +165,8 @@ $( document ).on( "pageshow", "#history,#detailsRequest,#chat", function() {
 
     ajaxModule.ajaxGetInfoPAcient(tmpPacient.id,1);
     chat.idPacient = tmpPacient.id;
+    data = {idRequest:chat.idRequest,rol:session.rol};
+    ajaxModule.ajaxGetInfoUser(data,18);
 
   $('.clinicHistory').on('collapsibleexpand', function (){
 
@@ -179,6 +181,10 @@ $( document ).on( "pageshow", "#chat", function() {
     ajaxModule.ajaxGetInfoUser(data,18);
     chat.setMessagesInterval();
     chat.getNewMessages();
+    if (activeRecord.currentRecord) {
+      
+    chat.idRecord = activeRecord.currentRecord;
+    };
     if (session.rol == 'ESP') {
       $("#backButtonChat").attr("href",'#myRequest');
     }else{
@@ -454,7 +460,7 @@ function seeDiagnostic () {
   var record = activeRecord.idHistory;
   var data = {idUser: session.idUser,
               session_id: session.sessionId,
-              idhistory:record};
+              idhistory: chat.idRecord};
     $.post( configuration.server + configuration.requestTypes[11].serverFunction,
     data,
     function( response ) {
@@ -468,6 +474,7 @@ function seeDiagnostic () {
            var diagnostic = response.data.customDiagnostic;
            for (var i =  0; i < diagnostic.length; i++) {
             var val = diagnostic[i];
+            val.diagnostic = parseInt(val.diagnostic);
              if (val.diagnostic == '0') {
               $("#principalDiagnosticGen").html("<li data-id='"+val.id+"''>" + val.code + ": "+ val.description+"</li>");
              };
@@ -492,6 +499,11 @@ $( document ).on( "pageshow", function(event) {
   session.page = event.target.id;
   if ($(event.target).attr("id") != 'login') {
     session.saveSession();    
+  }else if ($(event.target).attr("id") == 'login') {
+     if (requestInterval) {clearInterval(requestInterval);};
+     if (requestTimeout) {clearTimeout(requestTimeout);};
+     if (requestInterval) {clearInterval(requestInterval);};
+     if (chatInterval) {clearInterval(chatInterval);};
   };
 });
 
@@ -547,3 +559,5 @@ $(document).on("click", ".toPreview", function(event) {
 
   
  });
+
+$.mobile.defaultPageTransition = 'slidefade';

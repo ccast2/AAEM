@@ -248,6 +248,8 @@
 				<li data-role="list-divider">Examen físico:</li>
 				<li data-role="list-divider">TA:</li>
 				<li data-id="ta" ></li>
+				<li data-role="list-divider">Temperatura:</li>
+				<li data-id="temperature" ></li>
 				<li data-role="list-divider">Talla:</li>
 				<li data-id="size" ></li>
 				<li data-role="list-divider">FC:</li>
@@ -415,6 +417,11 @@
 							</div>	
 
 							<div class="ui-field-contain">
+								<label for="consulttemperature">Temperatura:</label>
+								<input type="text" name="consulttemperature" id="consulttemperature" placeholder="Temperatura" class="AAEM_required">
+							</div>	
+
+							<div class="ui-field-contain">
 								<label for="consultsize">Talla:</label>
 								<input type="text" name="consultsize" id="consultsize" placeholder="Talla" class="AAEM_required">
 							</div>
@@ -435,7 +442,7 @@
 
 							<div class="ui-field-contain">
 								<label for="consultimc">IMC:</label>
-								<input type="text" name="consultimc" id="consultimc" placeholder="IMC" class="AAEM_required">
+								<input type="text" name="consultimc" id="consultimc" placeholder="IMC" class="">
 							</div>
 
 							<div class="ui-field-contain" data-role="collapsible" >
@@ -445,17 +452,17 @@
 
 							<div class="ui-field-contain" data-role="collapsible" >
 								<h5>Cabeza, cara, cuello:</h5>
-								<textarea name="consulthead" id="consultahead" cols="30" rows="10" ></textarea>
+								<textarea name="consulthead" id="consultahead" cols="30" rows="10" class="AAEM_required"></textarea>
 							</div>
 
 							<div class="ui-field-contain" data-role="collapsible" >
 								<h5>Cardio Pulmonar:</h5>
-								<textarea name="consultcardio" id="consultcardio" cols="30" rows="10" ></textarea>
+								<textarea name="consultcardio" id="consultcardio" cols="30" rows="10" class="AAEM_required"></textarea>
 							</div>
 
 							<div class="ui-field-contain" data-role="collapsible" >
 								<h5>Abdomen:</h5>
-								<textarea name="consultabdomen" id="consultabdomen" cols="30" rows="10" ></textarea>
+								<textarea name="consultabdomen" id="consultabdomen" cols="30" rows="10" class="AAEM_required"></textarea>
 							</div>
 							<div class="ui-field-contain">
 								<Label for="consultheight">Altura uterina</Label>
@@ -510,11 +517,11 @@
 							</div>
 							<div class="ui-field-contain" data-role="collapsible" >
 								<h5>Extremidades:</h5>
-								<textarea name="consultarms" id="consultarms" cols="30" rows="10"></textarea>
+								<textarea name="consultarms" id="consultarms" cols="30" rows="10" class="AAEM_required"></textarea>
 							</div>
 							<div class="ui-field-contain" data-role="collapsible" >
 								<h5>Sistema nervioso central:</h5>
-								<textarea name="consultnervous" id="consultnervous" cols="30" rows="10"></textarea>
+								<textarea name="consultnervous" id="consultnervous" cols="30" rows="10" class="AAEM_required"></textarea>
 							</div>
 							<div class="ui-field-contain" data-role="collapsible" >
 								<h5>Diagnostico:</h5>
@@ -736,6 +743,18 @@
 		            <h4>Diagnostico adicional</h4>
 					<ul id="addtitionalDiagnostic" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Codigo o diagnostico" data-filter-theme="a"></ul>
 					<a href="#" id="saveDiagnostic"  data-role="button"  data-iconpos="left" data-mini="true" data-inline="true">Diagnosticar</a>
+		        </div>
+		</div>
+		<div data-role="popup" id="diagnosticoGen">
+			<h3>Diagnostico medico especialista</h3>
+		        <div style="padding:10px;">
+		            <h4>Diagnostico principal</h4>
+					<ul id="principalDiagnosticGen" data-role="listview"  data-filter-theme="a"></ul>
+		            <h4>Diagnostico secundario</h4>
+					<ul id="secondaryDiagnosticGen" data-role="listview"  data-filter-theme="a"></ul>
+		            <h4>Diagnostico adicional</h4>
+					<ul id="addtitionalDiagnosticGen" data-role="listview"  data-filter-theme="a"></ul>
+					
 		        </div>
 		</div>
 		<style>
