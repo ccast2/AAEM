@@ -103,14 +103,17 @@ function chat(idRequest,idRecord)
 			$('#textchat').focus();
 		}
 	};
-	this.updateChatWindow = function(data){
+	this.updateChatWindow = function(data,size){
 
-		printModule.printChatMessages(data);
-		for (var i = 0; i < data.length; i++) {
-			var chatObject = data[i];
-			this.messages.push(chatObject);
+		if (parseInt(size) != this.messages.length) {
+			
+			printModule.printChatMessages(data);
+			for (var i = 0; i < data.length; i++) {
+				var chatObject = data[i];
+				this.messages.push(chatObject);
+			};
+			this.updateLatency();
 		};
-		this.updateLatency();
 	};
 	this.setMessagesInterval = function () {
 
