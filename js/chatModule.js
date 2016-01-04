@@ -30,7 +30,7 @@ function chat(idRequest,idRecord)
 	}
 	this.getGaleryPhoto = function() {  
 
-	  navigator.camera.getPicture(uploadPhoto,cancelPhoto,{
+	  navigator.camera.getPicture(uploadChatPhoto,cancelChatPhoto,{
 	      quality: 100,
 	      destinationType: navigator.camera.DestinationType.FILE_URI,
 	      sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
@@ -42,7 +42,7 @@ function chat(idRequest,idRecord)
 	}
 	this.getCameraPhoto = function () {
     
-		  navigator.camera.getPicture(uploadPhoto,cancelPhoto,{
+		  navigator.camera.getPicture(uploadChatPhoto,cancelChatPhoto,{
 		    quality: 100,
 		    destinationType: Camera.DestinationType.FILE_URI,
 	        sourceType: Camera.PictureSourceType.CAMERA,
@@ -210,10 +210,11 @@ function chat(idRequest,idRecord)
 	}
 }
 chat = new chat();
-	cancelPhoto = function () {
+
+	function cancelChatPhoto() {
 		notifications.toast('Accion cancelada');
 	}
-	uploadPhoto = function (imageURI) {
+	function uploadChatPhoto (imageURI) {
 		var options = new FileUploadOptions();
 		options.fileKey="userfile";
 		if(navigator.userAgent.match(/OS/i)){
@@ -233,16 +234,16 @@ chat = new chat();
 		options.chunkedMode = false;
 
 		var ft = new FileTransfer();
-		ft.upload(imageURI, encodeURI(configuration.server + "upload/do_upload_chat"), win, fail, options);
+		ft.upload(imageURI, encodeURI(configuration.server + "upload/do_upload_chat"), winChat, failChat, options);
 	};
 
-	win = function (r) {
+	winChat = function (r) {
 		chat.getNewMessages();
 		response = r.response;
 		response = jQuery.parseJSON(response);
 	
 		console.log(response);	
 	}
-	fail = function (response) {
+	failChat = function (response) {
 		console.log(response);	
 	}
