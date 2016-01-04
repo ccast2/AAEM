@@ -210,3 +210,39 @@ function chat(idRequest,idRecord)
 	}
 }
 chat = new chat();
+	cancelPhoto = function () {
+		notifications.toast('Accion cancelada');
+	}
+	uploadPhoto = function (imageURI) {
+		var options = new FileUploadOptions();
+		options.fileKey="userfile";
+		if(navigator.userAgent.match(/OS/i)){
+			options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1);
+		}
+		options.mimeType="image/jpg";
+		var params = new Object();
+		params.value1 = "test";
+		params.value2 = "param";
+		params.idRequest = chat.idRequest;
+		params.session_id = session.sessionId;
+		params.idUser	 = session.idUser;
+		options.params = params;
+		options.headers = {
+			Connection: "close"
+		}
+		options.chunkedMode = false;
+
+		var ft = new FileTransfer();
+		ft.upload(imageURI, encodeURI(configuration.server + "upload/do_upload_chat"), win, fail, options);
+	};
+
+	win = function (r) {
+		chat.getNewMessages();
+		response = r.response;
+		response = jQuery.parseJSON(response);
+	
+		console.log(response);	
+	}
+	fail = function (response) {
+		console.log(response);	
+	}
