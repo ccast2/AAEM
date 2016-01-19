@@ -1,8 +1,8 @@
 function configurationModule (argument){
 		
 		// this.server 			= 'http://aaem.mision1a.com/index.php/';
-		// this.url 				= 'https://aaem.monkeyrates.com/';
-		this.url 			= 'http://appsalud.atlantico.gov.co:9090/aaem/';
+		this.url 				= 'http://aaem.monkeyrates.com/';
+		// this.url 			= 'http://appsalud.atlantico.gov.co:9090/aaem/';
 		this.server 			= this.url + 'index.php/';
 		this.errorCodes 		= [
 									{message: 'No error'}, //1
